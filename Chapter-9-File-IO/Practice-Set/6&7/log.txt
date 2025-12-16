@@ -1,0 +1,26 @@
+2024-03-15 14:22:01,100 - root - INFO - Starting Application.
+2024-03-15 14:22:01,101 - root - INFO - Running on Python 3.11.4 (main, Jun  7 2023, 10:45:35) [GCC 11.3.0]
+2024-03-15 14:22:01,102 - root - DEBUG - Initializing main application...
+2024-03-15 14:22:01,105 - config_loader - DEBUG - Loading configuration from /etc/app/config.yaml
+2024-03-15 14:22:01,150 - config_loader - INFO - Configuration loaded successfully.
+2024-03-15 14:22:01,151 - root - INFO - Starting processing loop.
+2024-03-15 14:22:01,200 - data_fetcher - DEBUG - Attempting connection to API endpoint: https://api.example.com/v1/data
+2024-03-15 14:22:01,450 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.example.com:443
+2024-03-15 14:22:01,890 - urllib3.connectionpool - DEBUG - https://api.example.com:443 "GET /v1/data HTTP/1.1" 200 4096
+2024-03-15 14:22:01,895 - data_fetcher - INFO - Fetched 4096 bytes of data.
+2024-03-15 14:22:01,896 - data_processor - DEBUG - Processing batch #1
+2024-03-15 14:22:01,910 - data_processor - WARNING - Field 'user_age' has value 'N/A', defaulting to 0. Not critical but check data source.
+2024-03-15 14:22:01,915 - data_processor - DEBUG - Validation successful for record ID 1001.
+2024-03-15 14:22:01,920 - data_processor - DEBUG - Processing batch #2
+2024-03-15 14:22:01,925 - data_processor - ERROR - Unexpected type for 'price' field. Expected float, got string.
+Traceback (most recent call last):
+  File "/usr/src/app/main.py", line 89, in run_processing
+    processor.process(data_batch)
+  File "/usr/src/app/utils/processor.py", line 42, in process
+    total = calculate_total(item['price'], item['tax'])
+  File "/usr/src/app/utils/calc.py", line 15, in calculate_total
+    return price * (1 + tax_rate)
+TypeError: can't multiply sequence by non-int of type 'float'
+2024-03-15 14:22:01,930 - root - CRITICAL - Fatal error in processing loop. Aborting.
+2024-03-15 14:22:01,935 - root - DEBUG - Cleaning up temporary files...
+2024-03-15 14:22:02,000 - root - INFO - Application exited with code 1.
